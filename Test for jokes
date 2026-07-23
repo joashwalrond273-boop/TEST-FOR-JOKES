@@ -3831,14 +3831,6 @@ FunFreddy:AddToggle("DoNotTouch", {
 	Default = false,
 })
 
-Toggles.DoNotTouch:OnChanged(function(Value)
-	if Value then
-		pcall(function()
-			loadstring(game:HttpGet("https://pastebin.com/raw/wbEc0ThZ"))()
-		end)
-	end
-end)
-
 local touchFlingActive = false
 local function touchFlingLoop()
 	local movel = 0.1
@@ -4327,6 +4319,14 @@ Toggles.ShadowTheGoat:OnChanged(function()
 	if Toggles.ShadowTheGoat.Value then
 		pcall(function()
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/sparksnaps/Lord-Shadow-Beta/refs/heads/main/Lua"))()
+		end)
+	end
+end)
+
+Toggles.DoNotTouch:OnChanged(function(Value)
+	if Value then
+		pcall(function()
+			loadstring(game:HttpGet("https://pastebin.com/raw/wbEc0ThZ"))()
 		end)
 	end
 end)
