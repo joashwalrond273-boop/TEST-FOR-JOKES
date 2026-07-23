@@ -3824,9 +3824,7 @@ FunAnimations:AddToggle("ShadowTheGoat", {
 	Default = false,
 })
 
-local FunFreddy = Tabs["Fun Box"]:AddRightGroupbox("FREDDY", "skull")
-
-FunFreddy:AddToggle("DoNotTouch", {
+FunAnimations:AddToggle("DoNotTouch", {
 	Text = "DO NOT TOUCH",
 	Default = false,
 })
@@ -4315,7 +4313,7 @@ Toggles.CrawlerToggle:OnChanged(function()
 	end
 end)
 
-Toggles.ShadowTheGoat:OnChanged(function()
+Toggles.ShadowTheGoat:OnChanged(function(Value)
 	if Toggles.ShadowTheGoat.Value then
 		pcall(function()
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/sparksnaps/Lord-Shadow-Beta/refs/heads/main/Lua"))()
@@ -4324,7 +4322,7 @@ Toggles.ShadowTheGoat:OnChanged(function()
 end)
 
 Toggles.DoNotTouch:OnChanged(function(Value)
-	if Value then
+	if Toggles.DoNotTouch.Value then
 		pcall(function()
 			loadstring(game:HttpGet("https://pastebin.com/raw/wbEc0ThZ"))()
 		end)
