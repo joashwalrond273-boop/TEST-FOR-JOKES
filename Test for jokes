@@ -593,11 +593,6 @@ MainRight:AddButton({
 })
 
 
-local FreezeToggle = MainRight:AddToggle("FreezeToggle", {
-	Text = "Freeze",
-	Default = false,
-})
-
 local DesyncToggle = MainRight:AddToggle("DesyncToggle", {
 	Text = "DESYNC",
 	Default = false,
@@ -605,36 +600,6 @@ local DesyncToggle = MainRight:AddToggle("DesyncToggle", {
 if DesyncToggle.TextLabel then
 	DesyncToggle.TextLabel.TextColor3 = Color3.fromRGB(0, 120, 215)
 end
-
-local freezePosition = nil
-
-FreezeToggle:OnChanged(function(Value)
-	if Value then
-		Library:Notify({ Title = "Freeze", Description = "Freeze Enabled!", Time = 2 })
-	else
-		Library:Notify({ Title = "Freeze", Description = "Freeze Disabled!", Time = 2 })
-		local character = getCharacter()
-		local hrp = character and character:FindFirstChild("HumanoidRootPart")
-		if hrp then
-			hrp.Velocity = Vector3.zero
-		end
-		freezePosition = nil
-	end
-end)
-
-track("FreezeLoop", RunService.RenderStepped:Connect(function()
-	if not Toggles.FreezeToggle or not Toggles.FreezeToggle.Value then return end
-	local character = getCharacter()
-	local hrp = character and character:FindFirstChild("HumanoidRootPart")
-	if not hrp then return end
-
-	if not freezePosition then
-		freezePosition = hrp.Position
-	end
-
-	hrp.Velocity = Vector3.zero
-	hrp.CFrame = CFrame.new(freezePosition)
-end))
 
 local desyncConnections = {}
 local desyncAnimTracks = {}
@@ -2215,7 +2180,7 @@ Toggles.FakeLag:OnChanged(function()
 				return
 			end
 			-- Stutter fake lag: randomly anchor and unanchor
-			if math.random() > 0.5 then
+			if math.random() > 0.99 then
 				hrp.Anchored = true
 			else
 				hrp.Anchored = false
@@ -4631,10 +4596,6 @@ ThemeManager:ApplyToTab(Tabs["UI Settings"])
 SaveManager:LoadAutoloadConfig()
 
 Library:OnUnload(function()
-
-	if Toggles.FreezeToggle and Toggles.FreezeToggle.Value then
-		Toggles.FreezeToggle:SetValue(false)
-	end
 
 	if Toggles.DesyncToggle and Toggles.DesyncToggle.Value then
 		Toggles.DesyncToggle:SetValue(false)
